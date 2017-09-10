@@ -7,7 +7,7 @@ zeta様 作成のオリジナルのC言語のソースコードをC#に移植し
 - http://www.nicovideo.jp/watch/sm31882296
 
 ## ダウンロード
-- Windows用 [v.1.0](https://github.com/ksasao/toWhisper/blob/master/ToWhisperNet1.0.zip?raw=true)
+- Windows用 [toWhisperNet v.1.0](https://github.com/ksasao/toWhisper/blob/master/ToWhisperNet1.0.zip?raw=true)
 - 無音部がある音声ファイルがうまく変換できない場合に暫定対応しました
 - 一部の機能が無効化されています
 
@@ -19,7 +19,7 @@ LPCボコーダをによって推測した声道フィルタを使い，
 ## 使い方
 --------
 ```console
-toWhisper [options] [infile]
+toWhisperNet [options] [infile]
 options: -oのみ必須
     -o : 出力ファイル名 [N/A] [wavefile]
     -e : 声帯音源の出力ファイル名 [N/A] [wavefile]
@@ -43,7 +43,7 @@ example:
 ## コンパイル
 -------------
 Visual Studio 2017 で .sln ファイルを開いてビルドしてください。
-- 無償の[Visual Studio Coomunity](https://www.visualstudio.com/ja/downloads/?rr=https%3A%2F%2Fwww.microsoft.com%2Fja-jp%2Fdev%2Fproducts%2Fcommunity.aspx)でもビルドできます。
+- 無償の[Visual Studio Community](https://www.visualstudio.com/ja/downloads/?rr=https%3A%2F%2Fwww.microsoft.com%2Fja-jp%2Fdev%2Fproducts%2Fcommunity.aspx)でもビルドできます。
 
 ## ライセンス
 -------------
