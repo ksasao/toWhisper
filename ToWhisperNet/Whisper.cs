@@ -12,13 +12,12 @@ namespace ToWhisperNet
         public int Order { get; set; } = 0;
         //有声音割合(0.0~1.0)
         public double Rate { get; set; } = 0.0;
-        //プリエンファシスHPFの係数(0.0~1.0)
+        //プリエンファシスフィルタの係数(0.0~1.0)
         public double Hpf { get; set; } = 0.97;
-        //デエンファシスLPFの係数(0.0~1.0)
+        //デエンファシスフィルタの係数(0.0~1.0)
         public double Lpf { get; set; }  = 0.97;
-        //ピーキングフィルタ
-        double p_fc = 3000.0, p_Q = 0.5, p_Gain = 0.5;
-        //frame幅
+
+        //フレーム幅をサンプル数に 
         public double FrameT { get; set; } = 20.0;
         int frame = 0;
 
@@ -81,20 +80,13 @@ namespace ToWhisperNet
                 {
                     y[j] = GenerateWhiteNoise();
                 }
-                //int tau1 = (int)y[0], tau2 = (int)y[0];
-                //for (int j = 1; j < frame; j++)
-                //{
-                //    tau2 = (int)y[j];
-                //    y[j] = y[j] - 0.97 * tau1;
-                //    tau1 = tau2;
-                //}
 
-                for (int ii = 1; ii < frame; ii++)
+                for (int j = 1; j < frame; j++)
                 {
-                    E[ii] = ((1.0 - Math.Pow(Rate, 0.5)) * E[ii - 1] + E[ii]) / (2.0 - Math.Pow(Rate, 0.5));
+                    E[j] = ((1.0 - Rate) * E[j - 1] + E[j]) / (2.0 - Rate);
                 }
                 //残差信号とノイズの二乗平均レベルをそろえる
-                max = Math.Sqrt(3 * max / frame);
+                max = Math.Sqrt(3.0 * max / frame);
                 for (int j = 0; j < frame; j++)
                 {
                     y[j] = Rate * E[j] + (1.0 - Rate) * max * y[j];
@@ -117,19 +109,6 @@ namespace ToWhisperNet
                 }
             }
 
-            //いい感じのピーキングフィルタ
-            {
-                double[] af = new double[3], bf = new double[3];
-                double fc = 0.5 / Math.PI * Math.Tan(p_fc * Math.PI / (double)wave.Format.SampleRate), Q = p_Q, gain = p_Gain;
-                double C = 2.0 * Math.PI * fc / Q;
-                bf[0] = (1.0 + C * (1.0 + gain) + 4.0 * Math.PI * Math.PI * fc * fc) / (1.0 + C + 4 * Math.PI * Math.PI * fc * fc);
-                bf[1] = (8.0 * Math.PI * Math.PI * fc * fc - 2.0) / (1.0 + C + 4.0 * Math.PI * Math.PI * fc * fc);
-                bf[2] = (1.0 - C * (1.0 + gain) + 4.0 * Math.PI * Math.PI * fc * fc) / (1.0 + C + 4 * Math.PI * Math.PI * fc * fc);
-                af[0] = 1.0;
-                af[1] = bf[1];
-                af[2] = (1.0 - C + 4.0 * Math.PI * Math.PI * fc * fc) / (1.0 + C + 4.0 * Math.PI * Math.PI * fc * fc);
-                LtiFilter(v1, length, af, 3, bf, 3);
-            }
             //デエンファシス
             for (int i = 1; i < length; i++) v1[i] = Lpf * v1[i - 1] + v1[i];
             for (int i = 1; i < length; i++) v2[i] = 0.97 * v2[i - 1] + v2[i];
