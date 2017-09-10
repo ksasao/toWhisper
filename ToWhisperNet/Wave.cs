@@ -56,7 +56,7 @@ namespace ToWhisperNet
             }
         }
 
-        int bias = 1;
+        short nonzero = 1;
 
         private double[] ConvertToDouble(byte[] data)
         {
@@ -64,7 +64,11 @@ namespace ToWhisperNet
             for(int i=0; i<data.Length; i+=2)
             {
                 short d = (short)(data[i] | (data[i + 1] << 8));
-                result[i / 2] = (d+bias) / (32767.0 + bias); // 信号レベルが0の状態が続くと以降が無音になってしまうための対応
+                if(d == 0)
+                {
+                    d = nonzero; // 信号レベルが0の状態が続くと以降が無音になってしまうための対応
+                }
+                result[i / 2] = d / 32767.0;
             }
             return result;
         }
@@ -73,8 +77,8 @@ namespace ToWhisperNet
             byte[] result = new byte[data.Length * 2];
             for (int i = 0; i < data.Length; i++)
             {
-                short d = (short)(data[i] * (32767.0 + bias));
-                if(d == bias)
+                short d = (short)(data[i] * 32767.0);
+                if(d == nonzero)
                 {
                     d = 0;
                 }
