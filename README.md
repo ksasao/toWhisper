@@ -10,7 +10,7 @@ zeta 様 (Twitter : https://twitter.com/zeta0313) 作成のC言語のソース�
 ## ダウンロード
 
 ### 2017/9/11
-- Windows用 [toWhisperNet v.1.0](https://github.com/ksasao/toWhisper/blob/master/ToWhisperNet1.1.zip?raw=true)
+- Windows用 [toWhisperNet v.1.1](https://github.com/ksasao/toWhisper/blob/master/ToWhisperNet1.1.zip?raw=true)
 - オリジナルのコードの変更に合わせてアルゴリズムを修正
 - 無音時の処理を改良
 
