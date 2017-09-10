@@ -4,7 +4,8 @@ toWhisper
 音声をささやき声にかえるソフトです．
 
 zeta様 作成のオリジナルのC言語のソースコードをC#に移植しました。
-- http://www.nicovideo.jp/watch/sm31882296
+- オリジナル https://github.com/zeta-chicken/toWhisper
+- 解説動画 http://www.nicovideo.jp/watch/sm31882296
 
 ## ダウンロード
 - Windows用 [toWhisperNet v.1.0](https://github.com/ksasao/toWhisper/blob/master/ToWhisperNet1.0.zip?raw=true)
