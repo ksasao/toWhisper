@@ -4,12 +4,12 @@ toWhisper
 音声をささやき声にかえるソフトです．
 
 zeta様 作成のオリジナルのC言語のソースコードをC#に移植しました。
-- (http://www.nicovideo.jp/watch/sm31882296)
+- http://www.nicovideo.jp/watch/sm31882296
 
 ## ダウンロード
 - Windows用 [v.1.0](https://github.com/ksasao/toWhisper/blob/master/ToWhisperNet1.0.zip?raw=true)
--- 無音部がある音声ファイルがうまく変換できない場合に暫定対応しました
--- 一部の機能が無効化されています
+- 無音部がある音声ファイルがうまく変換できない場合に暫定対応しました
+- 一部の機能が無効化されています
 
 ## 詳細
 -------
@@ -42,8 +42,8 @@ example:
 
 ## コンパイル
 -------------
-C言語の標準ライブラリしか使ってませんので，
-そのまま`make`を使ってコンパイルしてください．
+Visual Studio 2017 で .sln ファイルを開いてビルドしてください。
+- 無償の[Visual Studio Coomunity](https://www.visualstudio.com/ja/downloads/?rr=https%3A%2F%2Fwww.microsoft.com%2Fja-jp%2Fdev%2Fproducts%2Fcommunity.aspx)でもビルドできます。
 
 ## ライセンス
 -------------
