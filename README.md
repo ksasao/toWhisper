@@ -3,6 +3,14 @@ toWhisper
 
 音声をささやき声にかえるソフトです．
 
+zeta様 作成のオリジナルのC言語のソースコードをC#に移植しました。
+- (http://www.nicovideo.jp/watch/sm31882296)
+
+## ダウンロード
+- Windows用 [v.1.0](https://github.com/ksasao/toWhisper/blob/master/ToWhisperNet1.0.zip?raw=true)
+-- 無音部がある音声ファイルがうまく変換できない場合に暫定対応しました
+-- 一部の機能が無効化されています
+
 ## 詳細
 -------
 LPCボコーダをによって推測した声道フィルタを使い，
