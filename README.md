@@ -8,6 +8,9 @@ zeta 様 (Twitter : https://twitter.com/zeta0313) 作成のC言語のソース�
 - 解説動画 http://www.nicovideo.jp/watch/sm31882296
 
 ## ダウンロード
+### 2017/9/11
+- Windows用 [toWhisperNet v.1.2](https://github.com/ksasao/toWhisper/blob/master/ToWhisperNet1.2.zip?raw=true)
+- 16bit/モノラル以外の音声ファイルにも対応(出力は16bitモノラルになります)
 
 ### 2017/9/11
 - Windows用 [toWhisperNet v.1.1](https://github.com/ksasao/toWhisper/blob/master/ToWhisperNet1.1.zip?raw=true)
