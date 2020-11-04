@@ -11,11 +11,11 @@ namespace ToWhisperNet
         //LPC次数
         public int Order { get; set; } = 0;
         //有声音割合(0.0~1.0)
-        public double Rate { get; set; } = 0.0;
+        public double Rate { get; set; } = 0.02;
         //プリエンファシスフィルタの係数(0.0~1.0)
         public double Hpf { get; set; } = 0.97;
         //デエンファシスフィルタの係数(0.0~1.0)
-        public double Lpf { get; set; }  = 0.97;
+        public double Lpf { get; set; }  = 0.2;
 
         //フレーム幅をサンプル数に 
         public double FrameT { get; set; } = 20.0;

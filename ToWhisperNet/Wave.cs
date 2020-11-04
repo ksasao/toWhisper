@@ -26,21 +26,23 @@ namespace ToWhisperNet
         public double[] Read(string filename)
         {
             Data = null;
+
+            Format = new WaveFormat(48000, 16, 1);
+            string tmpFile = "resampled.wav";
             using (WaveFileReader reader = new WaveFileReader(filename))
             {
-                Format = reader.WaveFormat;
-                if (Format.Channels != 1)
+                using (var resampler = new MediaFoundationResampler(reader, Format))
                 {
-                    throw new FormatException("モノラル音声のみ対応しています");
+                    WaveFileWriter.CreateWaveFile(tmpFile, resampler);
                 }
-                if (Format.BitsPerSample != 16)
-                {
-                    throw new FormatException("16bit音声のみ対応しています");
-                }
+            }
+            using (WaveFileReader reader = new WaveFileReader(tmpFile))
+            {
                 byte[] src = new byte[reader.Length];
                 reader.Read(src, 0, src.Length);
                 Data = ConvertToDouble(src);
             }
+
             return Data;
         }
         /// <summary>
@@ -52,7 +54,8 @@ namespace ToWhisperNet
         {
             using (WaveFileWriter writer = new WaveFileWriter(filename, Format))
             {
-                writer.Write(ConvertToByte(data), 0, data.Length*2);
+                float scale = 5f;
+                writer.Write(ConvertToByte(data,scale), 0, data.Length*2);
             }
         }
 
@@ -72,12 +75,12 @@ namespace ToWhisperNet
             }
             return result;
         }
-        private byte[] ConvertToByte(double[] data)
+        private byte[] ConvertToByte(double[] data, float scale)
         {
             byte[] result = new byte[data.Length * 2];
             for (int i = 0; i < data.Length; i++)
             {
-                short d = (short)(data[i] * 32767.0);
+                short d = (short)(data[i] * 32767.0 * scale);
                 if(d == nonzero)
                 {
                     d = 0;
